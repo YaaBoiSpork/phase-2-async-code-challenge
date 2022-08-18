@@ -14,7 +14,9 @@ function App() {
   return (
     <div className="app">
       <Routes>
-        <Route path="/" element={<Home/>}/>
+        <Route path="/" element={<Home/>} />
+        <Route path="/movies" element={<MovieContainer/>} />
+        <Route path="/movies/new" element={<MovieForm/>} />
         {/* Add route "/movies", which renders <MovieContainer/>
         Add route "/movies/new", which renders <MovieForm/> */}
       </Routes>
