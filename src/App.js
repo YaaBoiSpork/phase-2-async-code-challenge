@@ -11,6 +11,8 @@ import { useState, useEffect } from "react";
 
 function App() {
  const [movies, setMovies] = useState([]);
+ const [filterByGenre, setFilterByGenre] = useState("");
+ const [search, setSearch] = useState("");
 
  useEffect(() => {
   fetch("http://localhost:3001/movies")
@@ -23,11 +25,18 @@ function App() {
   setMovies(updatedMovies)
  }
 
+ const filteredMovies = movies.filter(movie => {
+  if(filterByGenre === "") return movie
+  return movie.genre === filterByGenre
+ })
+
+ const searchByTitle = filteredMovieList.filter(movie => movie.title.toLowerCase().includes(search.toLowerCase()))
+
   return (
     <div className="app">
       <Routes>
         <Route path="/" element={<Home/>} />
-        <Route path="/movies" element={<MovieContainer movies={movies}/>} />
+        <Route path="/movies" element={<MovieContainer movies={searchByTitle} filterByGenre={filterByGenre} onFilterChange={setFilterByGenre} search={search} onSearch={setSearch}/>} />
         <Route path="/movies/new" element={<MovieForm onAddMovie={handleAddMovie}/>} />
       </Routes>
       

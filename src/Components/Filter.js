@@ -1,14 +1,17 @@
 import React from 'react'
 
-function Filter() {
+function Filter({ filterByGenre, onFilterChange }) {
+
+  const handleFilterChange = e => onFilterChange(e.target.value)
+
   return (
     <div>
-        <select>
+        <select value={filterByGenre} onChange={e => onFilterChange(e.target.value)}>
             <option value="" selected>All</option>
-            <option>Action</option>
-            <option>Horror</option>
-            <option>Drama</option>
-            <option>Comedy</option>
+            <option value="Action">Action</option>
+            <option value="Horror">Horror</option>
+            <option value="Drama">Drama</option>
+            <option value="Comedy">Comedy</option>
         </select>
     </div>
   )
