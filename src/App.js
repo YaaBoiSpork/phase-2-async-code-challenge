@@ -16,13 +16,19 @@ function App() {
   fetch("http://localhost:3001/movies")
   .then(resp => resp.json())
   .then(data => setMovies(data))
- })
+ }, [])
+
+ const handleAddMovie = (newMovie) => {
+  const updatedMovies = [...movies, newMovie]
+  setMovies(updatedMovies)
+ }
+
   return (
     <div className="app">
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/movies" element={<MovieContainer movies={movies}/>} />
-        <Route path="/movies/new" element={<MovieForm/>} />
+        <Route path="/movies/new" element={<MovieForm onAddMovie={handleAddMovie}/>} />
       </Routes>
       
     </div>
